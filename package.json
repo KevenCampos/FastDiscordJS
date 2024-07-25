@@ -1,0 +1,35 @@
+{
+  "name": "quick-discord-js",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "description": "QuickDiscordJS is an unofficial extension of the 'discord.js' library. Our extension aims to simplify the development of Discord bots, promoting cleaner code and easier maintenance.",
+  "scripts": {
+    "build": "tsc && node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "test": "tsx watch test/index.ts"
+  },
+  "bugs": {
+    "url": "https://github.com/KevenCampos/easy-discord-js/issues",
+    "email": "keven.mto@hotmail.com"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://www.paypal.com/donate/?hosted_button_id=DY2LFD4UYWQ2J"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KevenCampos/easy-discord-js/"
+  },
+  "author": "KevenCampos",
+  "license": "ISC",
+  "devDependencies": {
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "@types/node": "^20.14.11",
+    "discord.js": "^14.15.3",
+    "zod": "^3.23.8"
+  }
+}
