@@ -27,7 +27,7 @@ interface CustomOptions {
     intents?: GatewayIntentBits[];
 }
 
-export default class EaseClient extends Client {
+export default class QuickClient extends Client {
 
     customOptions?: CustomOptions;
     slashCommands: Collection<string, ISlashCommandHandler> = new Collection();

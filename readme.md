@@ -1,24 +1,22 @@
 
-# EaseDiscordJS
+# QuickDiscordJS
 
-EaseDiscordJS is an unofficial extension of the "discord.js" library. Our extension aims to simplify the development of Discord bots, promoting cleaner code and easier maintenance.
+Quick Discord JS is an unofficial extension of the "discord.js" library. Our extension aims to simplify the development of Discord bots, promoting cleaner code and easier maintenance.
 
 ## Features
 - Error prevention with user-friendly messages
 - Callback functions
 - Less code, more efficiency
 - Code and performance optimization
-- Comprehensive [documentation](https://camposcodes.gitbook.io/easediscordjs)
-
 
 ## Installation
 ```sh
-npm install ease-discord-js
+npm install quick-discord-js
 ```
 ## Get starting
 ```js
 import { GatewayIntentBits } from "discord.js";
-import { Client } from "ease-discord-js";
+import { Client } from "quick-discord-js";
 
 const client = new Client({ autoImport: ["./components", "./commands"], intents: [GatewayIntentBits.MessageContent]});
 client.login("YOUR-TOKEN-HERE")
@@ -30,8 +28,6 @@ client.on("ready", (client) => {
 Autoload and Intents are optional. If no Intent is provided, all intents will be sent to discord.
 
 Autoload is a list of folder paths that will be automatically imported by the system, without the need to use import or require, facilitating the workflow with discord
-
-This is just a little of our project, to see more details visit our [documentation](https://camposcodes.gitbook.io/easediscordjs)
 
 ## Creating a Slash Commands
 ```js
