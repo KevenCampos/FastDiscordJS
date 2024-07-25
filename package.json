@@ -10,8 +10,8 @@
     "test": "tsx watch test/index.ts"
   },
   "bugs": {
-    "url": "https://github.com/KevenCampos/easy-discord-js/issues",
-    "email": "keven.mto@hotmail.com"
+    "url": "https://github.com/KevenCampos/QuickDiscordJS/issues",
+    "email": "kevencampos1@hotmail.com"
   },
   "funding": {
     "type": "individual",
@@ -19,10 +19,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/KevenCampos/easy-discord-js/"
+    "url": "https://github.com/KevenCampos/QuickDiscordJS"
   },
   "author": "KevenCampos",
   "license": "ISC",
+  "keywords": [
+    "Discord",
+    "helper",
+    "discord-helper",
+    "discord-bot",
+    "discord.js",
+    "discord-easy",
+    "easy-discord",
+    "easy-discord-js",
+    "quick-discord",
+    "quick-discord-js"
+  ],
   "devDependencies": {
     "tsx": "^4.16.2",
     "typescript": "^5.5.3"
