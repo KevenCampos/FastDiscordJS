@@ -1,12 +1,11 @@
-import { Client, InteractionHandler } from "../class";
-import { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, CommandInteraction, ButtonInteraction, Interaction } from "discord.js";
+import { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle, CommandInteraction, ButtonInteraction } from "discord.js";
 
 type ModalInputOptions = {
     label: string;
     customId: string;
     style?: TextInputStyle;
     value?: string;
-    disabled?: boolean;
+    required?: boolean;
     placeholder?: string;
 }
 
@@ -17,7 +16,7 @@ type ModalData = {
 }
 
 class CustomModalBuilder extends ModalBuilder {
-    show(interaction: CommandInteraction | ButtonInteraction) {
+    show(interaction: any) {
         interaction.showModal(this);
     }
 }
@@ -50,6 +49,7 @@ const CreateModal = (modalData: ModalData) => {
             .setCustomId(input.customId)
             .setLabel(input.label)
             .setStyle(input.style || TextInputStyle.Short)
+            .setRequired(input.required || false)
 
         if (input.value) newComponent.setValue(input.value);
         if (input.placeholder) newComponent.setPlaceholder(input.placeholder);

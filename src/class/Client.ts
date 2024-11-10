@@ -27,7 +27,7 @@ interface CustomOptions {
     intents?: GatewayIntentBits[];
 }
 
-export default class QuickClient extends Client {
+export default class FastClient extends Client {
 
     customOptions?: CustomOptions;
     slashCommands: Collection<string, ISlashCommandHandler> = new Collection();
@@ -58,9 +58,19 @@ export default class QuickClient extends Client {
         return result;
     }
 
-    public async invokeInteraction(interactionName: string, interaction: Interaction | CommandInteraction){
+    public async invokeInteraction(interactionName: string, interaction: Interaction){
         const runInteractionHandler = this.getInteractionCallback(interactionName, interaction) ;
         if (runInteractionHandler) return await runInteractionHandler();
+    }
+
+    public async invokeCommand(commandName: string, interaction: Interaction | CommandInteraction){
+        const command = this.slashCommands.get(commandName)
+                
+        if (!command){
+            return console.error('Error on interaction! Command not found.');
+        }
+
+        await command.run(this, interaction as CommandInteraction);
     }
 
     public reloadCommands() {
@@ -111,7 +121,7 @@ export default class QuickClient extends Client {
                     return interaction.reply({content: 'Error on interaction! Command not found.', ephemeral: true});
                 }
 
-                command.run(this, interaction);
+                await command.run(this, interaction);
             }
 
             if (interaction.isButton() || interaction.isAnySelectMenu() || interaction.isModalSubmit()){
@@ -127,23 +137,31 @@ export default class QuickClient extends Client {
 
     private getInteractionCallback(customId: string, interaction: Interaction | CommandInteraction){
         if (interaction.isButton() || interaction.isAnySelectMenu() || interaction.isCommand() || interaction.isModalSubmit()){
-            let customId_without_params = customId?.split(":")[0];
-            const interactionHandler = interactionHandlers.get(customId) || interactionHandlers.get(customId_without_params);
-    
-            if (interactionHandler) {
-                let params: any[] = [];
-    
-                if (interactionHandler.useParams) {
-                    const separate_params = customId.split(":"); // separando os parametros, por exemplo: ['guild_id', 'client_id']
-                    params = separate_params.slice(1); // pegando os parametros, por exemplo: ['guild_id', 'client_id']
-                }
-    
-                const callback = interactionHandlers.get(interactionHandler.useParams ? customId_without_params : customId)?.run;
-                if (!callback) return console.log(`\x1b[36mCallback not found for customId: ${customId}\x1b[0m`);
-    
-                // vamos retornar a função para ser chamada posteriormente
-                return interactionHandler.useParams ? callback.bind(null, this, interaction, ...params) : callback.bind(null, this, interaction)
+
+            const useOptionInLastParam = customId.includes("(OILP)");
+            customId = customId.replace("(OILP)", "");
+
+            const customId_whitout_params = customId?.split(":")[0]
+            const interactionHandler = interactionHandlers.get(customId_whitout_params);
+
+            if (!interactionHandler){
+                return console.log(`\x1b[36mInteractionHandler not found for customId: ${customId}\x1b[0m`);
             }
+
+            let params: string[] = [];
+
+            const separate_params = customId.split(":");
+            params = separate_params.slice(1);
+            
+            if (interaction.isAnySelectMenu() && useOptionInLastParam) {
+                params.push(interaction.values[0]);
+            }
+
+            const callback = interactionHandlers.get(customId_whitout_params)?.run;
+            if (!callback) return console.log(`\x1b[36mCallback not found for customId: ${customId}\x1b[0m`);
+
+            // vamos retornar a função para ser chamada posteriormente
+            return callback.bind(null, this, interaction, ...params)
         }
     }
 }

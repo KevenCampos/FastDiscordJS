@@ -11,23 +11,37 @@ interface OptionData {
 interface MenuData {
     customId: string;
     placeholder: string;
+    minValue?: number;
+    maxValue?: number;
+    type?: ChannelType;
+    getValueInLastParam?: boolean;
+}
+
+interface MenuStringData {
+    customId: string;
+    placeholder: string;
     options: OptionData[];
     minValue?: number;
     maxValue?: number;
     type?: ChannelType;
+    getValueInLastParam?: boolean;
 }
 
 export default class CreateSelect {
     UserSelectMenuBuilder(menuData: MenuData): UserSelectMenuBuilder {
         try {
 
-            const customId = menuData.customId;
             const placeholder = menuData.placeholder;
+            const useOptionInLastParam = menuData.getValueInLastParam;
+            
+            let customId = menuData.customId;
             let minValue = menuData.minValue;
             let maxValue = menuData.maxValue;
 
             if (!customId) throw new Error('>> SelectMenu custom_id is required');
             if (!placeholder) throw new Error('>> SelectMenu placeholder is required');
+
+            if (useOptionInLastParam) customId += '(OILP)';
             if (minValue === undefined) minValue = 1;
             if (maxValue === undefined) maxValue = 1;
 
@@ -43,15 +57,19 @@ export default class CreateSelect {
         }
     }
 
-    StringSelectMenuBuilder(menuData: MenuData): StringSelectMenuBuilder {
+    StringSelectMenuBuilder(menuData: MenuStringData): StringSelectMenuBuilder {
         try {
-            const customId = menuData.customId
             const placeholder = menuData.placeholder
+            const useOptionInLastParam = menuData.getValueInLastParam;
+            
+            let customId = menuData.customId
             let minValue = menuData.minValue
             let maxValue = menuData.maxValue
 
             if (!customId) throw new Error('>> SelectMenu custom_id is required');
             if (!placeholder) throw new Error('>> SelectMenu placeholder is required');
+
+            if (useOptionInLastParam) customId += '(OILP)';
             if (minValue === undefined) minValue = 1;
             if (maxValue === undefined) maxValue = 1;
             if (!menuData.options || menuData.options.length <= 0) throw new Error('>> SelectMenu options is required. You need to pass an array of options');
@@ -85,14 +103,18 @@ export default class CreateSelect {
 
     ChannelSelectMenuBuilder(menuData: MenuData): ChannelSelectMenuBuilder {
         try {
-            const customId = menuData.customId
             const placeholder = menuData.placeholder
+            const useOptionInLastParam = menuData.getValueInLastParam
+            
+            let customId = menuData.customId
             let minValue = menuData.minValue
             let maxValue = menuData.maxValue
             let type = menuData.type
 
             if (!customId) throw new Error('>> SelectMenu custom_id is required');
             if (!placeholder) throw new Error('>> SelectMenu placeholder is required');
+
+            if (useOptionInLastParam) customId += '(OILP)';
             if (minValue === undefined) minValue = 1;
             if (maxValue === undefined) maxValue = 1;
             if (!type) type = ChannelType.GuildText;
@@ -112,13 +134,17 @@ export default class CreateSelect {
 
     RoleSelectMenuBuilder(menuData: MenuData): RoleSelectMenuBuilder {
         try {
-            const customId = menuData.customId
             const placeholder = menuData.placeholder
+            const useOptionInLastParam = menuData.getValueInLastParam
+            
+            let customId = menuData.customId
             let minValue = menuData.minValue
             let maxValue = menuData.maxValue
 
             if (!customId) throw new Error('>> SelectMenu custom_id is required');
             if (!placeholder) throw new Error('>> SelectMenu placeholder is required');
+
+            if (useOptionInLastParam) customId += '(OILP)';
             if (minValue === undefined) minValue = 1;
             if (maxValue === undefined) maxValue = 1;
 

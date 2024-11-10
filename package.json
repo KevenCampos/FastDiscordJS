@@ -1,16 +1,16 @@
 {
-  "name": "quick-discord-js",
-  "version": "1.0.0",
-  "main": "src/index.ts",
-  "description": "QuickDiscordJS is an unofficial extension of the 'discord.js' library. Our extension aims to simplify the development of Discord bots, promoting cleaner code and easier maintenance.",
+  "name": "fast-discord-js",
+  "version": "1.0.8",
+  "main": "dist/index.js",
+  "description": "FastDiscordJS is an unofficial extension of the 'discord.js' library. Our extension aims to simplify the development of Discord bots, promoting cleaner code and easier maintenance.",
   "scripts": {
     "build": "tsc && node dist/index.js",
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch src/test/index.ts",
     "start": "node dist/index.js",
     "test": "tsx watch test/index.ts"
   },
   "bugs": {
-    "url": "https://github.com/KevenCampos/QuickDiscordJS/issues",
+    "url": "https://github.com/KevenCampos/FastDiscordJS/issues",
     "email": "kevencampos1@hotmail.com"
   },
   "funding": {
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/KevenCampos/QuickDiscordJS"
+    "url": "https://github.com/KevenCampos/FastDiscordJS"
   },
   "author": "KevenCampos",
   "license": "ISC",
@@ -32,8 +32,8 @@
     "discord-easy",
     "easy-discord",
     "easy-discord-js",
-    "quick-discord",
-    "quick-discord-js"
+    "fast-discord",
+    "fast-discord-js"
   ],
   "devDependencies": {
     "tsx": "^4.16.2",
@@ -42,6 +42,7 @@
   "dependencies": {
     "@types/node": "^20.14.11",
     "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
     "zod": "^3.23.8"
   }
 }

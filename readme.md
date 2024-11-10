@@ -1,7 +1,7 @@
 
-# QuickDiscordJS
+# FastDiscordJS
 
-Quick Discord JS is an unofficial extension of the "discord.js" library. Our extension aims to simplify the development of Discord bots, promoting cleaner code and easier maintenance.
+Fast Discord JS is an unofficial extension of the "discord.js" library. Our extension aims to simplify the development of Discord bots, promoting cleaner code and easier maintenance.
 
 ## Features
 - Error prevention with user-friendly messages
@@ -11,12 +11,12 @@ Quick Discord JS is an unofficial extension of the "discord.js" library. Our ext
 
 ## Installation
 ```sh
-npm install quick-discord-js
+npm install fast-discord-js
 ```
 ## Get starting
 ```js
 import { GatewayIntentBits } from "discord.js";
-import { Client } from "quick-discord-js";
+import { Client } from "fast-discord-js";
 
 const client = new Client({ autoImport: ["./components", "./commands"], intents: [GatewayIntentBits.MessageContent]});
 client.login("YOUR-TOKEN-HERE")
