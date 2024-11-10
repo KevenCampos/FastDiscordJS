@@ -1,4 +1,4 @@
-import { ModalBuilder, TextInputStyle, CommandInteraction, ButtonInteraction } from "discord.js";
+import { ModalBuilder, TextInputStyle } from "discord.js";
 type ModalInputOptions = {
     label: string;
     customId: string;
@@ -13,7 +13,7 @@ type ModalData = {
     customId: string;
 };
 declare class CustomModalBuilder extends ModalBuilder {
-    show(interaction: CommandInteraction | ButtonInteraction): void;
+    show(interaction: any): void;
 }
 declare const CreateModal: (modalData: ModalData) => CustomModalBuilder;
 export default CreateModal;

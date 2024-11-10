@@ -12,6 +12,7 @@ interface MenuData {
     minValue?: number;
     maxValue?: number;
     type?: ChannelType;
+    getValueInLastParam?: boolean;
 }
 interface MenuStringData {
     customId: string;
@@ -20,6 +21,7 @@ interface MenuStringData {
     minValue?: number;
     maxValue?: number;
     type?: ChannelType;
+    getValueInLastParam?: boolean;
 }
 export default class CreateSelect {
     UserSelectMenuBuilder(menuData: MenuData): UserSelectMenuBuilder;

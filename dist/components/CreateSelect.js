@@ -4,14 +4,17 @@ const discord_js_1 = require("discord.js");
 class CreateSelect {
     UserSelectMenuBuilder(menuData) {
         try {
-            const customId = menuData.customId;
             const placeholder = menuData.placeholder;
+            const useOptionInLastParam = menuData.getValueInLastParam;
+            let customId = menuData.customId;
             let minValue = menuData.minValue;
             let maxValue = menuData.maxValue;
             if (!customId)
                 throw new Error('>> SelectMenu custom_id is required');
             if (!placeholder)
                 throw new Error('>> SelectMenu placeholder is required');
+            if (useOptionInLastParam)
+                customId += '(OILP)';
             if (minValue === undefined)
                 minValue = 1;
             if (maxValue === undefined)
@@ -29,14 +32,17 @@ class CreateSelect {
     }
     StringSelectMenuBuilder(menuData) {
         try {
-            const customId = menuData.customId;
             const placeholder = menuData.placeholder;
+            const useOptionInLastParam = menuData.getValueInLastParam;
+            let customId = menuData.customId;
             let minValue = menuData.minValue;
             let maxValue = menuData.maxValue;
             if (!customId)
                 throw new Error('>> SelectMenu custom_id is required');
             if (!placeholder)
                 throw new Error('>> SelectMenu placeholder is required');
+            if (useOptionInLastParam)
+                customId += '(OILP)';
             if (minValue === undefined)
                 minValue = 1;
             if (maxValue === undefined)
@@ -72,8 +78,9 @@ class CreateSelect {
     }
     ChannelSelectMenuBuilder(menuData) {
         try {
-            const customId = menuData.customId;
             const placeholder = menuData.placeholder;
+            const useOptionInLastParam = menuData.getValueInLastParam;
+            let customId = menuData.customId;
             let minValue = menuData.minValue;
             let maxValue = menuData.maxValue;
             let type = menuData.type;
@@ -81,6 +88,8 @@ class CreateSelect {
                 throw new Error('>> SelectMenu custom_id is required');
             if (!placeholder)
                 throw new Error('>> SelectMenu placeholder is required');
+            if (useOptionInLastParam)
+                customId += '(OILP)';
             if (minValue === undefined)
                 minValue = 1;
             if (maxValue === undefined)
@@ -101,14 +110,17 @@ class CreateSelect {
     }
     RoleSelectMenuBuilder(menuData) {
         try {
-            const customId = menuData.customId;
             const placeholder = menuData.placeholder;
+            const useOptionInLastParam = menuData.getValueInLastParam;
+            let customId = menuData.customId;
             let minValue = menuData.minValue;
             let maxValue = menuData.maxValue;
             if (!customId)
                 throw new Error('>> SelectMenu custom_id is required');
             if (!placeholder)
                 throw new Error('>> SelectMenu placeholder is required');
+            if (useOptionInLastParam)
+                customId += '(OILP)';
             if (minValue === undefined)
                 minValue = 1;
             if (maxValue === undefined)

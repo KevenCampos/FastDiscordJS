@@ -149,20 +149,24 @@ class FastClient extends discord_js_1.Client {
     getInteractionCallback(customId, interaction) {
         var _a;
         if (interaction.isButton() || interaction.isAnySelectMenu() || interaction.isCommand() || interaction.isModalSubmit()) {
-            let customId_without_params = customId === null || customId === void 0 ? void 0 : customId.split(":")[0];
-            const interactionHandler = InteractionHandler_1.interactionHandlers.get(customId) || InteractionHandler_1.interactionHandlers.get(customId_without_params);
-            if (interactionHandler) {
-                let params = [];
-                if (interactionHandler.useParams) {
-                    const separate_params = customId.split(":"); // separando os parametros, por exemplo: ['guild_id', 'client_id']
-                    params = separate_params.slice(1); // pegando os parametros, por exemplo: ['guild_id', 'client_id']
-                }
-                const callback = (_a = InteractionHandler_1.interactionHandlers.get(interactionHandler.useParams ? customId_without_params : customId)) === null || _a === void 0 ? void 0 : _a.run;
-                if (!callback)
-                    return console.log(`\x1b[36mCallback not found for customId: ${customId}\x1b[0m`);
-                // vamos retornar a função para ser chamada posteriormente
-                return interactionHandler.useParams ? callback.bind(null, this, interaction, ...params) : callback.bind(null, this, interaction);
+            const useOptionInLastParam = customId.includes("(OILP)");
+            customId = customId.replace("(OILP)", "");
+            const customId_whitout_params = customId === null || customId === void 0 ? void 0 : customId.split(":")[0];
+            const interactionHandler = InteractionHandler_1.interactionHandlers.get(customId_whitout_params);
+            if (!interactionHandler) {
+                return console.log(`\x1b[36mInteractionHandler not found for customId: ${customId}\x1b[0m`);
             }
+            let params = [];
+            const separate_params = customId.split(":");
+            params = separate_params.slice(1);
+            if (interaction.isAnySelectMenu() && useOptionInLastParam) {
+                params.push(interaction.values[0]);
+            }
+            const callback = (_a = InteractionHandler_1.interactionHandlers.get(customId_whitout_params)) === null || _a === void 0 ? void 0 : _a.run;
+            if (!callback)
+                return console.log(`\x1b[36mCallback not found for customId: ${customId}\x1b[0m`);
+            // vamos retornar a função para ser chamada posteriormente
+            return callback.bind(null, this, interaction, ...params);
         }
     }
 }
