@@ -1,4 +1,4 @@
-import { ApplicationCommandOption, ApplicationCommandType, CommandInteraction } from "discord.js";
+import { ApplicationCommandOption, ApplicationCommandType, AutocompleteInteraction, CommandInteraction } from "discord.js";
 import { Client } from ".";
 
 export const slashCommandHandlers = new Map();
@@ -8,7 +8,9 @@ export interface ISlashCommandHandler {
     description: string,
     type: ApplicationCommandType,
     run: (client: Client, interaction: CommandInteraction) => any,
-    options?: ApplicationCommandOption[]
+    options?: ApplicationCommandOption[],
+
+    autocomplete?: (client: Client, interaction: AutocompleteInteraction) => any,
 }
 
 export default class {

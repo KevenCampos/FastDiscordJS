@@ -1,4 +1,4 @@
-import Discord, { Client, ClientOptions, GatewayIntentBits, Collection, Events, Interaction, MessagePayload, InteractionReplyOptions, InteractionResponse, BooleanCache, Message, CommandInteraction } from "discord.js";
+import Discord, { Client, ClientOptions, GatewayIntentBits, Collection, Events, Interaction, MessagePayload, InteractionReplyOptions, InteractionResponse, BooleanCache, Message, CommandInteraction, AutocompleteInteraction } from "discord.js";
 import { interactionHandlers } from "./InteractionHandler";
 import { slashCommandHandlers } from "./SlashCommand";
 
@@ -122,6 +122,22 @@ export default class FastClient extends Client {
                 }
 
                 await command.run(this, interaction);
+            }
+
+            if (interaction.isAutocomplete()){
+                const command = this.slashCommands.get(interaction.commandName)
+
+                if (!command){
+                    return console.error('Error on interaction autocomplete! Command not found.');
+                }
+
+                if (command.autocomplete){
+                    try {
+                        await command.autocomplete(this, interaction);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
             }
 
             if (interaction.isButton() || interaction.isAnySelectMenu() || interaction.isModalSubmit()){

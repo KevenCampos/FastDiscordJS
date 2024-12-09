@@ -7,6 +7,20 @@ new SlashCommand({
     description: "Test command",
     type: ApplicationCommandType.ChatInput,
 
+    options: [
+        {
+            name: "option1",
+            description: "Option 1",
+            type: 3,
+            required: true,
+            autocomplete: true
+        }
+    ],
+
+    autocomplete: async (client, interaction) => {
+        console.log("Autocomplete test command");
+    },
+
     run: async (client, interaction) => {
 
         const options = [
